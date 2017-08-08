@@ -10,13 +10,13 @@ function initMap() {
 	});
 }
 
-function MapViewModel() {
-	// var self = this;
- //    self.currentPoint = ko.observable( new Point ({
- //        lat: 40.578,
- //        lng: -73.959
- //    }) );
-}
+// function MapViewModel() {
+// 	// var self = this;
+//  //    self.currentPoint = ko.observable( new Point ({
+//  //        lat: 40.578,
+//  //        lng: -73.959
+//  //    }) );
+// }
 
-// Activates knockout.js
-//ko.applyBindings(new MapViewModel());
+// // Activates knockout.js
+// ko.applyBindings(new MapViewModel());
