@@ -3,6 +3,17 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
 #map {
 	height: 100%;
+}
+
+#map_controls {
+	height: 100%;
+	width: 400px;
+	z-index: 20;
+	position: absolute;
+	background-color: #000;
+	opacity: 0.8;
+	color: #FFF;
 }
