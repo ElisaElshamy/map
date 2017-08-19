@@ -2,22 +2,56 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>My Neighborhood</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<div id="map_controls">
-			<ul data-bind="foreach: markerList">
-				<li data-bind="text: title, click: $parent.setRestaurant"></li>
-			</ul>
-		</div>
+
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#map_controls" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="map_controls">
+		      <form class="navbar-form">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search" data-bind="textInput: search">
+		        </div>
+		      </form>
+		      <ul class="nav navbar-nav" data-bind="foreach: markerList">
+		        <li data-bind="text: title, click: $parent.setRestaurant"></li>
+		      </ul>
+		    </div><!-- end navbar-collapse -->
+		  </div><!-- end container-fluid -->
+		</nav>
+
 		<div id="map"></div>
+		<div class="row">
+			<footer class="col-xs-12">
+				<div class="footer_content">
+					Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> 
+					from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
+					is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+				</div>
+			</footer>
+		</div>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   			crossorigin="anonymous"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+  			crossorigin="anonymous"></script>
 		<script type='text/javascript' src='js/knockout-3.4.2.js'></script>
-		<script type='text/javascript' src='js/map.js'></script>
-	
+		<script type='text/javascript' src='js/map.js'></script>	
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg6iTnoJ08spZ6hpWtOlceoyEvbAxTJFo&callback=initMap"></script>
+
 	</body>
 </html>

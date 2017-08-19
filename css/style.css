@@ -4,16 +4,67 @@ html, body {
 	padding: 0;
 }
 
+a, li:hover {
+	color: #b275e7;
+}
+
+a:hover {
+	color: #6f5499;
+	text-decoration: none;
+}
+
 #map {
 	height: 100%;
 }
 
-#map_controls {
-	height: 100%;
-	width: 400px;
-	z-index: 20;
+@media (max-width: 767px) {
+	.navbar {
+		width: 100% !important;
+	}
+
+}
+
+.navbar {
+	width: 360px;
+	margin-bottom: 0;
 	position: absolute;
-	background-color: #000;
+	z-index: 20;
+	top: 60px;
 	opacity: 0.8;
+}
+
+.navbar-nav {
+	float: none;
+	padding: 20px 0;
+}
+
+.navbar-nav>li {
+	float: none;
+	margin: 10px 0;
+}
+
+#map_controls {
 	color: #FFF;
+}
+
+.navbar-form {
+	padding: 0;
+}
+
+.row {
+	margin: 0;
+}
+
+footer {
+	color: #FFF;
+	background-color: #000;
+	position: absolute !important;
+	text-align: center;
+	height: 60px;
+	z-index: 20;
+	bottom: 0;
+}
+
+.footer_content {
+	padding: 20px 0;
 }

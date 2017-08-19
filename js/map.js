@@ -15,18 +15,18 @@ var client_secret = 'RVHZN0JBJ0M3Q5Q2CMUJHZHLVYDQWJL2T0L2UADY2IUCZCIC';
 var today = new Date();
 //The value returned by getMonth is an integer between 0 and 11
 var current_date = String(today.getFullYear()) + '0' + String(today.getMonth()+1) + String(today.getDate());
-
-console.log(current_date);
 var map;
+//var infowindow;
 
 function Marker(location) {
-	this.title = location.name;
+	this.title = ko.observable(location.name);
 	this.position = location.point;
+	this.marker = location.marker;
 }
 
 function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: 40.6290465, lng: -73.9871572},
+		center: {lat: 40.6350066, lng: -74.0023493},
 		zoom: 13
 	});
 
@@ -37,7 +37,7 @@ function MapViewModel() {
 	// A neat little trick to have a variable pointer to the VM 
 	var self = this;
 
-	this.markerList = ko.observableArray([]);
+	self.markerList = ko.observableArray([]);
 
 	restaurants.forEach(function(restaurant){
 		
@@ -49,19 +49,6 @@ function MapViewModel() {
 		    animation: google.maps.Animation.DROP
 		});
 
-		var infowindow = new google.maps.InfoWindow({
-    		content: "contentString"
-  		});
-
-		marker.addListener('click', function() {
-          	marker.setAnimation(google.maps.Animation.BOUNCE);
-          	setTimeout(function () {
-          		marker.setAnimation(null);
-			}, 1500);
-
-          	infowindow.open(map, marker);
-		});
-
 		$.ajax({
 			type: "GET",
 			dataType: 'json',
@@ -69,24 +56,59 @@ function MapViewModel() {
 			url: 'https://api.foursquare.com/v2/venues/' + restaurant.venue_id + '?client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + current_date,
 			async: true,
 			success: function(data) {
-					console.log(data.response);
+				console.log(data.response.venue);
+				var infowindow = new google.maps.InfoWindow({
+					content: '<div><h2 class="restaurant-name"><a href="' + data.response.venue.canonicalUrl + '">' + 
+								data.response.venue.name + '</a></h2><p>Phone: ' + data.response.venue.contact.formattedPhone +
+								'</p><p>' + data.response.venue.location.formattedAddress[0] + '<br>' +
+								data.response.venue.location.formattedAddress[1] + '</p><p>Rating: ' + data.response.venue.rating +
+								'/10 <span class="price" style="margin-left: 1.4em">Price: ' + data.response.venue.price.currency + '</span></p></div>'
+				});
+
+				marker.addListener('click', function() {
+			      	marker.setAnimation(google.maps.Animation.BOUNCE);
+			      	setTimeout(function () {
+			      		marker.setAnimation(null);
+					}, 1500);
+
+			      	infowindow.open(map, marker);
+				});
+
+				restaurant.marker = marker;
+				self.markerList.push(new Marker(restaurant));
+
 			},
 			error: function(data) {
 				alert("Error retrieving data from foursquare.");
 			}
 		});
 
-		self.markerList.push(new Marker(restaurant));
+		
 
 	});
 
-	this.currentMarker = ko.observable();
+	self.currentMarker = ko.observable();
 
-	this.setRestaurant = function(clickedMarker) {
+	self.setRestaurant = function(clickedMarker) {
 		self.currentMarker(clickedMarker);
 		map.panTo(clickedMarker.position); 
+		google.maps.event.trigger(clickedMarker.marker, 'click');
 		map.setZoom(16);
 	};
+
+	self.search = ko.observable("");
+
+	self.searchRestaurants = ko.computed(function () {
+        var filter = self.search().toLowerCase();
+
+        if (!filter) {
+            return self.markerList();
+        } else {
+            return ko.utils.arrayFilter(self.markerList(), function (item) {
+                return item.title().toLowerCase().indexOf(filter) !== -1;
+            });
+        }
+    });
 
 }
 
