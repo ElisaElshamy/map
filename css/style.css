@@ -55,16 +55,20 @@ a:hover {
 	margin: 0;
 }
 
+.foursquare-logo {
+	height: 40px;
+}
+
 footer {
 	color: #FFF;
 	background-color: #000;
 	position: absolute !important;
 	text-align: center;
-	height: 60px;
 	z-index: 20;
 	bottom: 0;
 }
 
 .footer_content {
 	padding: 20px 0;
+	background-color: #000;
 }

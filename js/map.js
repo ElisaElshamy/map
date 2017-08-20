@@ -55,7 +55,6 @@ function MapViewModel() {
 			url: 'https://api.foursquare.com/v2/venues/' + restaurant.venue_id + '?client_id=' + client_id + '&client_secret=' + client_secret + '&v=' + current_date,
 			async: true,
 			success: function(data) {
-				console.log(data.response.venue);
 				var infowindow = new google.maps.InfoWindow({
 					content: '<div><h2 class="restaurant-name"><a href="' + data.response.venue.canonicalUrl + '">' + 
 								data.response.venue.name + '</a></h2><p>Phone: ' + data.response.venue.contact.formattedPhone +
