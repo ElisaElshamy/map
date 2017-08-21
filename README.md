@@ -5,7 +5,7 @@ A map of Brooklyn that shows my top five favorite restaurants.
 # Install
 
 Head over to the map directory's index.html file.  Run this file in your browser
-or visit "" to see Elisa's favorite restaurants on a Google Map.  Please make
+to see Elisa's favorite restaurants on a Google Map.  Please make
 sure to have Javascript enabled as well as a connection to the internet.
 
 # How to use
